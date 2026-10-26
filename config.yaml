@@ -1,0 +1,52 @@
+# yt-to-site pipeline configuration
+
+channel:
+  id: "UCwx5VcEH9RVrME6EPADJ-eA"  # YouTube channel ID von Dr. Mutlaq al-Jasir
+  source_language: ar             # Primäre Sprache des Kanals (Arabisch)
+
+data_dir: data                    # Speicherort für JSONL-Dateien und Transkripte
+
+content_types:
+  - videos                        # Zu verarbeitende Inhalte
+
+transcription:
+  format_model: google/gemini-2.5-flash   # LLM für die Strukturierung der Transkripte
+  parallel_workers: 6
+  quran_validation: true                  # Auf true gesetzt für islamischen Content
+
+translation:
+  locales:                        # Zielsprachen für die Übersetzung
+    - de                          # Deutsch
+    - sq                          # Albanisch
+    - es
+    - fr
+  model: google/gemini-2.5-flash
+  fallback_model: google/gemini-2.5-pro
+  batch_size: 20
+  parallel_workers: 5
+
+summarization:
+  model: google/gemini-2.5-flash
+
+interlink:
+  embed_model: embed-multilingual-v3.0
+  embed_batch_size: 96
+  min_similarity: 0.3
+  max_links_per_chunk: 3
+
+seo:
+  model: google/gemini-2.5-flash
+
+web:
+  site_name: "Dr. Mutlaq al-Jasir Archive"
+  site_description: "Vorlesungen und Videos von Dr. Mutlaq al-Jasir, transkribiert und mehrsprachig übersetzt"
+  default_locale: ar
+  supported_locales:
+    - ar                          # Arabisch (Standard)
+    - de                          # Deutsch
+    - sq                          # Albanisch
+    - es
+    - fr
+  domain: mutlaq-aljasir.example.com  # Kann später durch deine echte Domain ersetzt werden
+
+sleep: 1.0                         # Verzögerung zwischen API-Aufrufen (Sekunden)
