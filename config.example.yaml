@@ -1,22 +1,23 @@
 # yt-to-site pipeline configuration
-# Copy this to config.yaml and customize for your channel.
 
 channel:
-  handle: "@mkbhd"           # YouTube channel handle
-  source_language: en         # Primary language of the channel
+  id: "UCwx5VcEH9RVrME6EPADJ-eA"  # YouTube channel ID von Dr. Mutlaq al-Jasir
+  source_language: ar             # Primäre Sprache des Kanals (Arabisch)
 
-data_dir: data                # Where JSONL files and transcripts are stored
+data_dir: data                    # Speicherort für JSONL-Dateien und Transkripte
 
 content_types:
-  - videos                    # Content types to process
+  - videos                        # Zu verarbeitende Inhalte
 
 transcription:
-  format_model: google/gemini-2.5-flash   # LLM for structuring raw transcripts into markdown
+  format_model: google/gemini-2.5-flash   # LLM für die Strukturierung der Transkripte
   parallel_workers: 6
-  quran_validation: false                  # Set true for Islamic content (requires quran-validator)
+  quran_validation: true                  # Auf true gesetzt für islamischen Content
 
 translation:
-  locales:                    # Target languages (source language is excluded automatically)
+  locales:                        # Zielsprachen für die Übersetzung
+    - de                          # Deutsch
+    - sq                          # Albanisch
     - es
     - fr
   model: google/gemini-2.5-flash
@@ -37,13 +38,15 @@ seo:
   model: google/gemini-2.5-flash
 
 web:
-  site_name: "MKBHD Archive"
-  site_description: "Every MKBHD video, transcribed, translated, and interlinked"
-  default_locale: en
+  site_name: "Dr. Mutlaq al-Jasir Archive"
+  site_description: "Vorlesungen und Videos von Dr. Mutlaq al-Jasir, transkribiert und mehrsprachig übersetzt"
+  default_locale: ar
   supported_locales:
-    - en
+    - ar                          # Arabisch (Standard)
+    - de                          # Deutsch
+    - sq                          # Albanisch
     - es
     - fr
-  domain: mkbhd-archive.example.com
+  domain: mutlaq-aljasir.example.com  # Kann später durch deine echte Domain ersetzt werden
 
-sleep: 1.0                    # Delay between API calls (seconds)
+sleep: 1.0                         # Verzögerung zwischen API-Aufrufen (Sekunden)
